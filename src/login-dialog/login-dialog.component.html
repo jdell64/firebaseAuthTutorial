@@ -1,0 +1,54 @@
+<!--<md-card>-->
+<div *ngIf="loginRequested; else signUp" [@enterAnimation]="loginRequested">
+  <form class="login-form" >
+    <h3>Login</h3>
+    <div class="row">
+      <md-input-container>
+        <input mdInput type="email" placeholder="Email" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container>
+        <input mdInput type="password" placeholder="Password" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <button md-raised-button color="primary">Login</button>
+    </div>
+    <!--TODO: login with google-->
+    <hr>
+    <div class="row">
+      <button md-raised-button (click)="loginRequested = !loginRequested" >Register Instead</button>
+    </div>
+  </form>
+</div>
+
+<ng-template #signUp >
+  <form class="login-form" [@enterAnimation]="loginRequested">
+    <h3>Sign Up</h3>
+    <div class="row">
+      <md-input-container>
+        <input mdInput type="email" placeholder="Email" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container>
+        <input mdInput type="password" placeholder="Password" required>
+      </md-input-container>
+    </div>
+    <!--TODO: do these match-->
+    <div class="row">
+      <md-input-container>
+        <input mdInput type="password" placeholder="Verify Password" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <button md-raised-button color="primary">Create Account</button>
+    </div>
+    <hr>
+    <div class="row">
+      <button md-raised-button (click)="loginRequested = !loginRequested">Already have an account</button>
+    </div>
+  </form>
+</ng-template>
+<!--</md-card>-->
