@@ -1,0 +1,65 @@
+<!--<md-card>-->
+<!--todo: username as well-->
+<div *ngIf="loginRequested; else signUp"
+     (submit)="emailLogin($event, email.value, password.value)"
+     [@enterAnimation]="loginRequested">
+  <form class="login-form" (submit)="emailLogin($event, email.value, password.value)">
+    <h3>Login</h3>
+    <div class="row">
+      <md-input-container>
+        <input class="w100" mdInput type="email" #email placeholder="Email" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container>
+        <input class="w100" mdInput type="password" #password placeholder="Password" required>
+      </md-input-container>
+    </div>
+    <div class="row" *ngIf="error" [@enterAnimation]="loginRequested">
+      <!--TODO: custom error messages-->
+      <div class="error-message">{{error}}</div>
+    </div>
+    <div class="row">
+      <button md-raised-button color="primary" type="submit">Login</button>
+    </div>
+    <!--TODO:  with google-->
+    <hr>
+    <div class="row">
+      <button md-raised-button (click)="loginRequested = !loginRequested">Create new account</button>
+    </div>
+  </form>
+</div>
+
+<ng-template #signUp>
+  <form class="login-form" [@enterAnimation]="loginRequested" (submit)="register($event, email.value, password.value)">
+    <h3>Sign Up</h3>
+    <div class="row">
+      <md-input-container>
+        <input class="w100" mdInput type="email" #email id="email" placeholder="Email" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container>
+        <input class="w100" mdInput type="password" #password id="password" placeholder="Password" required>
+      </md-input-container>
+    </div>
+    <!--TODO: do these match-->
+    <div class="row">
+      <md-input-container>
+        <input class="w100" mdInput type="password" placeholder="Verify Password" required>
+      </md-input-container>
+    </div>
+    <div class="row" *ngIf="error" [@enterAnimation]="loginRequested">
+      <!--TODO: custom error messages-->
+      <div class="error-message">{{error}}</div>
+    </div>
+    <div class="row">
+      <button md-raised-button color="primary" type="submit">Create Account</button>
+    </div>
+    <hr>
+    <div class="row">
+      <button md-raised-button (click)="loginRequested = !loginRequested">Already have an account</button>
+    </div>
+  </form>
+</ng-template>
+<!--</md-card>-->

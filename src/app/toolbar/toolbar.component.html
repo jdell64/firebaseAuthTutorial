@@ -8,12 +8,14 @@
   </md-toolbar>
 
   <div id="user-container">
-    <div hidden id="user-pic"></div>
-    <div hidden id="user-name"></div>
-    <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+    <div *ngIf="currentUser" id="user-pic" [ngStyle]="profilePicStyles"></div>
+    <div *ngIf="currentUser" id="user-name">{{ (af.auth | async)?.auth.displayName }}</div>
+    <button *ngIf="currentUser" id="sign-out" (click)="logout()"
+            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
       Sign-out
     </button>
-    <button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+    <button *ngIf="!currentUser" id="sign-in" (click)="login()"
+            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
       <i class="material-icons">account_circle</i>Sign-in with Google
     </button>
   </div>
@@ -23,10 +25,16 @@
     <button md-menu-item>Option 2</button>
   </md-menu>
 
-  <div>
+  <div *ngIf="currentUser; then signOut else signIn"></div>
+  <ng-template #signOut>
+    <button md-raised-button (click)="logout()">Logout</button>
+  </ng-template>
+  <ng-template #signIn>
     <button md-raised-button (click)="openDialog()">Login</button>
-    <p>Result from dialog: {{ result }}</p>
+  </ng-template>
+
+  <div *ngIf="currentUser">
+    current user: {{currentUser.auth.email}}
   </div>
-
-
 </div>
+

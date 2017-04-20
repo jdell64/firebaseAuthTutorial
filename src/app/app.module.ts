@@ -9,7 +9,8 @@ import {AppComponent} from './app.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {MyMaterialModule} from "./my-material-module/my-material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {LoginDialogModule} from "../login-dialog/login-dialog.module";
+import {LoginDialogModule} from "./login-dialog/login-dialog.module";
+import {FirebaseService} from "./services/firebase.service";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAPl20yIB9bsm0lMbXdpPmwOfKaes32CHY",
@@ -36,7 +37,9 @@ export const firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [
+    FirebaseService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

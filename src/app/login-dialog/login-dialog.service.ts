@@ -8,7 +8,7 @@ export class LoginDialogService {
 
   constructor(private dialog: MdDialog) { }
 
-  public login(): Observable<boolean> {
+  public openLoginDialogue(): Observable<boolean> {
 
     let dialogRef: MdDialogRef<LoginDialogComponent>;
 
