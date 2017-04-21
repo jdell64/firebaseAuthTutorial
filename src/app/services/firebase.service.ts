@@ -72,7 +72,7 @@ export class FirebaseService {
    * @returns {firebase.Promise<void>}
    */
   registerUser(email, password) {
-    // console.log(email)
+    console.log(email)
     return this.af.auth.createUser({
       email: email,
       password: password
@@ -102,6 +102,7 @@ export class FirebaseService {
    * @returns {firebase.Promise<FirebaseAuthState>}
    */
   loginWithEmail(email, password) {
+    console.log(email);
     return this.af.auth.login({
         email: email,
         password: password,

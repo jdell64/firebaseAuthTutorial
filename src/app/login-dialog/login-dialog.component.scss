@@ -1,0 +1,17 @@
+form.login-form .row {
+  margin: 10px 0;
+  &.error-message {
+    max-width: 167px;
+    margin: -15px 0 10px;
+  }
+}
+form.login-form .row button {
+  width: 100%;
+}
+form.login-form {
+  trasition: all 5s;
+  overflow: hidden;
+}
+form.login-form {
+
+}

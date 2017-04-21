@@ -19,7 +19,7 @@ export class ToolbarComponent implements OnInit {
 
     this.af.auth.subscribe((user: FirebaseAuthState) => {
       this.currentUser = user;
-      console.log(user)
+      // console.log(user)
       if (user) { // User is signed in!
         /*this.profilePicStyles = {
          'background-image':  `url(${this.currentUser.auth.photoURL})`
@@ -84,7 +84,7 @@ export class ToolbarComponent implements OnInit {
   public openDialog() {
     this.loginDialogService
       .openLoginDialogue()
-      .subscribe(res => console.log("res:", res));
+      // .subscribe(res => console.log("res:", res));
     // .subscribe(res => console.log("res:", res));
     // .subscribe(res => this.result = res; );
   }

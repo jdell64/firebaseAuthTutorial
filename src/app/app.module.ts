@@ -11,6 +11,7 @@ import {MyMaterialModule} from "./my-material-module/my-material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {LoginDialogModule} from "./login-dialog/login-dialog.module";
 import {FirebaseService} from "./services/firebase.service";
+import { EqualValidator } from './directives/equal-validator.directive';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAPl20yIB9bsm0lMbXdpPmwOfKaes32CHY",
@@ -25,7 +26,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+
   ],
   imports: [
     BrowserModule,

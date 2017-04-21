@@ -1,26 +1,43 @@
-<!--<md-card>-->
+<!--TODO: refractor this... DRY? -->
 <!--todo: username as well-->
-<div *ngIf="loginRequested; else signUp"
-     (submit)="emailLogin($event, email.value, password.value)"
-     [@enterAnimation]="loginRequested">
-  <form class="login-form" (submit)="emailLogin($event, email.value, password.value)">
+
+<div *ngIf="loginRequested; then signIn else signUp" ></div>
+<!--LOGIN-->
+<ng-template #signIn>
+  <form #loginForm="ngForm" class="login-form" [@enterAnimation]="loginRequested"
+        (submit)="emailLogin($event, loginForm.value, loginForm.valid)"
+        novalidate>
     <h3>Login</h3>
     <div class="row">
       <md-input-container>
-        <input class="w100" mdInput type="email" #email placeholder="Email" required>
+        <input class="w100" mdInput type="email" name="email"
+               placeholder="Email" [(ngModel)]="user.email"
+               #email="ngModel" required pattern=".+@.+\..+">
       </md-input-container>
+      <!--TODO: don't invalidate while typing!-->
+      <div class="row error-message" [hidden]="email.valid || (email.pristine && !loginForm.submitted)">
+        <small>Email is required and format should be <i>john@doe.com</i>.</small>
+      </div>
     </div>
+
     <div class="row">
       <md-input-container>
-        <input class="w100" mdInput type="password" #password placeholder="Password" required>
+        <input class="w100" mdInput name="password" type="password"
+               [ngModel]="user.password" #password="ngModel" placeholder="Password" required>
       </md-input-container>
+
+      <div class="row error-message" [hidden]="password.valid || (password.pristine && !loginForm.submitted)">
+        <small>Password is required.</small>
+      </div>
     </div>
-    <div class="row" *ngIf="error" [@enterAnimation]="loginRequested">
-      <!--TODO: custom error messages-->
-      <div class="error-message">{{error}}</div>
+
+    <div class="row error-message" [hidden]="!error"> <!--server errors-->
+      <small *ngIf="error" [@enterAnimation]="loginRequested">{{error}}</small>
     </div>
+
+
     <div class="row">
-      <button md-raised-button color="primary" type="submit">Login</button>
+      <button md-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Login</button>
     </div>
     <!--TODO:  with google-->
     <hr>
@@ -28,33 +45,59 @@
       <button md-raised-button (click)="loginRequested = !loginRequested">Create new account</button>
     </div>
   </form>
-</div>
+</ng-template>
 
 <ng-template #signUp>
-  <form class="login-form" [@enterAnimation]="loginRequested" (submit)="register($event, email.value, password.value)">
+  <!--REGISTER-->
+  <form #signinForm="ngForm" class="login-form" (submit)="register($event, signinForm.value, signinForm.valid)"
+        [@enterAnimation]="loginRequested" novalidate>
     <h3>Sign Up</h3>
-    <div class="row">
+    <!--TODO: username-->
+
+    <div class="row"> <!--email-->
       <md-input-container>
-        <input class="w100" mdInput type="email" #email id="email" placeholder="Email" required>
+        <input class="w100" mdInput type="email" name="email"
+               placeholder="Email" [(ngModel)]="user.email"
+               #email="ngModel" required pattern=".+@.+\..+">
       </md-input-container>
+      <!--TODO: don't invalidate while typing!-->
+      <div class="row error-message" [hidden]="email.valid || (email.pristine && !signinForm.submitted)">
+        <small>Email is required and format should be <i>john@doe.com</i>.</small>
+      </div>
     </div>
-    <div class="row">
+
+    <div class="row"> <!--password-->
       <md-input-container>
-        <input class="w100" mdInput type="password" #password id="password" placeholder="Password" required>
+        <input class="w100" mdInput name="password" type="password"
+               [ngModel]="user.password" #password="ngModel"
+               placeholder="Password" validateEqual="confirmPassword" reverse="true" required>
       </md-input-container>
+      <div class="row error-message" [hidden]="password.valid || (password.pristine && !signinForm.submitted)">
+        <small>Password is required.</small>
+      </div>
     </div>
-    <!--TODO: do these match-->
-    <div class="row">
+
+
+    <div class="row"> <!--validate password-->
       <md-input-container>
-        <input class="w100" mdInput type="password" placeholder="Verify Password" required>
+        <input class="w100" mdInput name="confirmPassword" type="password"
+               [ngModel]="user.confirmPassword" #confirmPassword="ngModel"
+               placeholder="Verify Password" validateEqual="password" required>
+        <!-- -->
       </md-input-container>
+      <div class="row error-message"
+           [hidden]="confirmPassword.valid || (confirmPassword.pristine && !signinForm.submitted)">
+        <small>Password mismatch.</small>
+      </div>
     </div>
+
+    <!--server errors-->
     <div class="row" *ngIf="error" [@enterAnimation]="loginRequested">
       <!--TODO: custom error messages-->
       <div class="error-message">{{error}}</div>
     </div>
     <div class="row">
-      <button md-raised-button color="primary" type="submit">Create Account</button>
+      <button md-raised-button color="primary" type="submit" [disabled]="!signinForm.form.valid">Create Account</button>
     </div>
     <hr>
     <div class="row">

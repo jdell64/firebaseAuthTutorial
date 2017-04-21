@@ -2,39 +2,48 @@
   <md-toolbar color="primary">
     <span><md-icon>videogame_asset</md-icon></span>
     <span>MCoC Team Manager</span>
-    <button md-icon-button [md-menu-trigger-for]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
+
+    <div id="user-container">
+
+      <div *ngIf="currentUser" id="user-pic" [ngStyle]="profilePicStyles"></div>
+      <!--TODO: style this-->
+      <div *ngIf="currentUser" id="user-name">{{ (af.auth | async)?.auth.displayName || (af.auth | async)?.auth.email }}</div>
+
+      <div *ngIf="currentUser; then signOut else signIn"></div>
+      <ng-template #signOut>
+        <button md-raised-button color="accent" (click)="logout()">
+          <md-icon>exit_to_app</md-icon>
+          Logout
+        </button>
+      </ng-template>
+      <ng-template #signIn>
+        <button md-raised-button color="accent" (click)="openDialog()">
+          <md-icon>account_circle</md-icon>
+          Login/Sign Up
+        </button>
+      </ng-template>
+    </div>
+
+
+
+
+    <!--TODO: COLLAPSABLE MENU-->
+    <!--<button md-icon-button [md-menu-trigger-for]="menu">-->
+    <!--<md-icon>more_vert</md-icon>-->
+    <!--</button>-->
+
   </md-toolbar>
 
-  <div id="user-container">
-    <div *ngIf="currentUser" id="user-pic" [ngStyle]="profilePicStyles"></div>
-    <div *ngIf="currentUser" id="user-name">{{ (af.auth | async)?.auth.displayName }}</div>
-    <button *ngIf="currentUser" id="sign-out" (click)="logout()"
-            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-      Sign-out
-    </button>
-    <button *ngIf="!currentUser" id="sign-in" (click)="login()"
-            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-      <i class="material-icons">account_circle</i>Sign-in with Google
-    </button>
-  </div>
 
+  <!--
   <md-menu x-position="before" #menu="mdMenu">
     <button md-menu-item>Option 1</button>
     <button md-menu-item>Option 2</button>
   </md-menu>
+-->
 
-  <div *ngIf="currentUser; then signOut else signIn"></div>
-  <ng-template #signOut>
-    <button md-raised-button (click)="logout()">Logout</button>
-  </ng-template>
-  <ng-template #signIn>
-    <button md-raised-button (click)="openDialog()">Login</button>
-  </ng-template>
-
-  <div *ngIf="currentUser">
-    current user: {{currentUser.auth.email}}
-  </div>
 </div>
 
+<div *ngIf="currentUser">
+  current user: {{currentUser.auth.email}}
+</div>
