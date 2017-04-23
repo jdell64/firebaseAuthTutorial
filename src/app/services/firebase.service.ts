@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import {FirebaseObjectFactoryOpts} from "angularfire2/interfaces";
+import {User} from "../user";
 @Injectable()
 
 export class FirebaseService {
@@ -19,7 +20,7 @@ export class FirebaseService {
         }
       });
 
-    this.messages = this.af.database.list('messages');
+    // this.messages = this.af.database.list('messages');
     this.users = this.af.database.list('users');
   }
 
@@ -53,20 +54,6 @@ export class FirebaseService {
   }
 
   /**
-   * Saves a message to the Firebase Realtime Database
-   * @param text
-   */
-  sendMessage(text) {
-    var message = {
-      message: text,
-      displayName: this.displayName,
-      email: this.email,
-      timestamp: Date.now()
-    };
-    this.messages.push(message);
-  }
-
-  /**
    *
    * @param model
    * @returns {firebase.Promise<void>}
@@ -88,10 +75,10 @@ export class FirebaseService {
    * @returns {firebase.Promise<void>}
    */
   // saveUserInfoFromForm(uid, name, email) {
-  saveUserInfoFromForm(uid, email) {
+  saveUserInfoFromForm(uid, user: User) {
     return this.af.database.object('registeredUsers/' + uid).set({
       // name: name,
-      email: email,
+      email: user.email,
     });
   }
 

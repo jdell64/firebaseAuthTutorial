@@ -40,6 +40,10 @@
       <button md-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Login</button>
     </div>
     <!--TODO:  with google-->
+    <div class="row google-sign-in">
+      <button type="button" (click)="loginWithGoogle()"></button>
+    </div>
+
     <hr>
     <div class="row">
       <button md-raised-button (click)="loginRequested = !loginRequested">Create new account</button>

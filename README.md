@@ -1,6 +1,9 @@
-# McocTeamManager
+# Firebase Tutorial
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+
+## todo
+rename project, reinit git
 
 ## Development server
 
@@ -31,3 +34,8 @@ https://scotch.io/tutorials/how-to-implement-a-custom-validator-directive-confir
 https://medium.com/@tarik.nzl/angular-2-custom-form-control-with-validation-json-input-2b4cf9bc2d73
 
 TODO: call validators on lost focus(on blur?)
+
+
+TODO: login form should not be invalid when logging in with google
+login form should close when logging in with google. 
+core.es5.js:1084 ERROR Error: Uncaught (in promise):

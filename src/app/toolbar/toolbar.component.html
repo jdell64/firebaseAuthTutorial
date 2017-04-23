@@ -4,10 +4,10 @@
     <span>MCoC Team Manager</span>
 
     <div id="user-container">
-
-      <div *ngIf="currentUser" id="user-pic" [ngStyle]="profilePicStyles"></div>
+      <!--[ngStyle]="profilePicStyles"-->
+      <span *ngIf="currentUser" id="user-pic"></span>
       <!--TODO: style this-->
-      <div *ngIf="currentUser" id="user-name">{{ (af.auth | async)?.auth.displayName || (af.auth | async)?.auth.email }}</div>
+      <span *ngIf="currentUser" id="user-name">{{ (af.auth | async)?.auth.displayName || (af.auth | async)?.auth.email }}</span>
 
       <div *ngIf="currentUser; then signOut else signIn"></div>
       <ng-template #signOut>

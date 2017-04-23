@@ -53,7 +53,7 @@ export class LoginDialogComponent implements OnInit {
     if (isValid) {
       this.firebaseService.registerUser(usr.email, usr.password).then((user) => {
         // this.firebaseService.saveUserInfoFromForm(user.uid, name, email).then(() => {
-        this.firebaseService.saveUserInfoFromForm(user.uid, usr.email).then(() => {
+        this.firebaseService.saveUserInfoFromForm(user.uid, usr).then(() => {
           // this.router.navigate(['']);
           this.dialogRef.close(true)
         }).catch((error) => { // error with saving user info
@@ -76,7 +76,7 @@ export class LoginDialogComponent implements OnInit {
     event.preventDefault();
     if (isValid) {
       this.firebaseService.loginWithEmail(usr.email, usr.password).then((user) => {
-        this.firebaseService.saveUserInfoFromForm(user.uid, usr.email).then(() => {
+        this.firebaseService.saveUserInfoFromForm(user.uid, usr).then(() => {
           // navigate?
           // console.log(this.dialogRef);
           this.dialogRef.close(true)
@@ -94,6 +94,14 @@ export class LoginDialogComponent implements OnInit {
       });
     }
   }
+
+  loginWithGoogle() {
+    this.firebaseService.loginWithGoogle().then((data) => {
+      // console.log(data);
+      this.dialogRef.close(true);
+    })
+  }
+
 
   // TODO: make these global strings?
   // TODO: this could be in the service

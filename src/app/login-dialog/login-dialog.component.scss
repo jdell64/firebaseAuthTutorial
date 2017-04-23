@@ -15,3 +15,20 @@ form.login-form {
 form.login-form {
 
 }
+.google-sign-in button {
+  background:url(/assets/google_signin_buttons/btn_google_signin_dark_normal_web@2x.png) no-repeat;
+  background-size: 167px;
+  cursor:pointer;
+  width: 200px;
+  height: 40px;
+  border: none;
+  &:active {
+    background:url(/assets/google_signin_buttons/btn_google_signin_dark_pressed_web@2x.png) no-repeat;
+    background-size: 167px;
+  }
+  &:focus, &:hover{
+    background:url(/assets/google_signin_buttons/btn_google_signin_dark_focus_web@2x.png) no-repeat;
+    background-size: 167px;
+    outline: none;
+  }
+}
