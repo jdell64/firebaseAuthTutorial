@@ -14,12 +14,7 @@ import {FirebaseService} from "./services/firebase.service";
 import { EqualValidator } from './directives/equal-validator.directive';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyAPl20yIB9bsm0lMbXdpPmwOfKaes32CHY",
-  authDomain: "mcocteammanager.firebaseapp.com",
-  databaseURL: "https://mcocteammanager.firebaseio.com",
-  projectId: "mcocteammanager",
-  storageBucket: "mcocteammanager.appspot.com",
-  messagingSenderId: "503718597267"
+  //TODO
 };
 
 
